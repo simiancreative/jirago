@@ -2,11 +2,11 @@ package filters
 
 import (
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/andygrunwald/go-jira"
 	"jirago/lib/client"
-	"jirago/lib/logger"
 )
 
-func Run() *string {
+func Run() (*string, error) {
 	filters, _, _ := client.Client.Filter.GetMyFilters(nil)
 	var filterNames []string
 
@@ -30,11 +30,10 @@ func Run() *string {
 
 	err := survey.Ask(qs, &answers)
 	if err != nil {
-		logger.Error("---", logger.Fields{"err": err.Error()})
-		return nil
+		return nil, err
 	}
 
-	mapNames := make(map[string]client.Filter)
+	mapNames := make(map[string]*jira.Filter)
 
 	for _, v := range filters {
 		mapNames[v.Name] = v
@@ -42,5 +41,5 @@ func Run() *string {
 
 	filter := mapNames[answers.Filter]
 
-	return &filter.ID
+	return &filter.Jql, nil
 }

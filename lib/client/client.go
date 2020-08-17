@@ -9,8 +9,6 @@ var (
 	Client *jira.Client
 )
 
-type Filter *jira.Filter
-
 func Setup() {
 	tp := jira.BasicAuthTransport{
 		Username: viper.GetString("username"),
