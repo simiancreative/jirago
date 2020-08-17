@@ -1,17 +1,16 @@
 package config
 
 import (
-	"os"
+	"fmt"
+	"path/filepath"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
-
-	"jirago/lib/logger"
 )
 
 var cfgFile string
 
-func Setup() {
+func Setup() error {
 	if cfgFile != "" {
 		// Use config file from the flag.
 		viper.SetConfigFile(cfgFile)
@@ -19,22 +18,21 @@ func Setup() {
 		// Find home directory.
 		home, err := homedir.Dir()
 		if err != nil {
-			logger.Error("home dir failed", logger.Fields{"err": err})
-			os.Exit(1)
+			return err
 		}
 
 		// Search config in home directory with name ".jirago" (without extension).
-		viper.AddConfigPath(home + "/.config")
+		path := filepath.FromSlash(fmt.Sprintf("%s/.config", home))
+		viper.AddConfigPath(path)
 		viper.SetConfigName("jirago")
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match
 
 	// If a config file is found, read it in.
-	if err := viper.ReadInConfig(); err == nil {
-
-		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			logger.Error("no config found", logger.Fields{"file": viper.ConfigFileUsed()})
-		}
+	if err := viper.ReadInConfig(); err != nil {
+		return err
 	}
+
+	return nil
 }

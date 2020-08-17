@@ -7,7 +7,10 @@ import (
 )
 
 func Run() (*string, error) {
-	filters, _, _ := client.Client.Filter.GetMyFilters(nil)
+	filters, _, ferr := client.Client.Filter.GetMyFilters(nil)
+	if ferr != nil {
+		return nil, ferr
+	}
 	var filterNames []string
 
 	for _, filter := range filters {

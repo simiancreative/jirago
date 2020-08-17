@@ -3,6 +3,7 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 
+	actions "jirago/lib/handlers/transitions"
 	"jirago/lib/logger"
 	"jirago/lib/surveys/filters"
 	"jirago/lib/surveys/issues"
@@ -42,7 +43,11 @@ func run(cmd *cobra.Command, args []string) error {
 	}
 	t := *tid
 
-	logger.Info("---", logger.Fields{"transition": t})
+	action := actions.Actions[t]
+	logger.Info("---", logger.Fields{
+		"t":      t,
+		"action": action,
+	})
 
 	return nil
 }
