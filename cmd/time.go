@@ -3,8 +3,12 @@ package cmd
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/andygrunwald/go-jira"
+	"github.com/olebedev/when"
+	"github.com/olebedev/when/rules/common"
+	"github.com/olebedev/when/rules/en"
 	"github.com/spf13/cobra"
 
 	"jirago/lib/client"
@@ -22,6 +26,9 @@ func init() {
 }
 
 func addTimeRun(cmd *cobra.Command, args []string) error {
+	var w = when.New(nil)
+	w.Add(en.All...)
+	w.Add(common.All...)
 
 	issueID := args[0]
 	loe := args[1]
@@ -34,10 +41,29 @@ func addTimeRun(cmd *cobra.Command, args []string) error {
 		TimeSpent: loe,
 	}
 
+	if len(args) == 3 {
+		resp, err := w.Parse(args[2], time.Now())
+		if err != nil {
+			return err
+		}
+
+		if resp == nil {
+			return fmt.Errorf("No Matches for '%s'", args[2])
+		}
+
+		started := jira.Time(resp.Time)
+		worklog.Started = &started
+	}
+
 	_, _, err := client.Client.Issue.AddWorklogRecord(issueID, &worklog, cb)
 
 	if err != nil {
 		return err
+	}
+
+	if worklog.Started != nil {
+		fmt.Printf("\nAdded %s to %s at %s\n", loe, issueID, time.Time(*worklog.Started))
+		return nil
 	}
 
 	fmt.Printf("\nAdded %s to %s\n", loe, issueID)

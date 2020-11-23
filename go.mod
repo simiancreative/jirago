@@ -6,6 +6,7 @@ require (
 	github.com/AlecAivazis/survey/v2 v2.1.1
 	github.com/andygrunwald/go-jira v1.12.0
 	github.com/mitchellh/go-homedir v1.1.0
+	github.com/olebedev/when v0.0.0-20190311101825-c3b538a97254
 	github.com/sirupsen/logrus v1.2.0
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.1
