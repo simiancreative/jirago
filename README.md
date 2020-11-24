@@ -12,7 +12,7 @@ following format:
 
 ```yaml
 username: {your jira username}
-password: {newly generates api key}
+password: {newly generated api key}
 ```
 
 ## Install
