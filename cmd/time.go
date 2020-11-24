@@ -16,9 +16,18 @@ import (
 
 // addTimeCommand represents the transition command
 var addTimeCommand = &cobra.Command{
-	Use:   "time",
-	Short: "Add time to jira tickets",
-	RunE:  addTimeRun,
+	Use:   "time [issueID] [duration] <natural language start time>",
+	Short: "Add worklogs to jira tasks",
+	Long: `Add worklogs to jira tasks.
+
+Arguments
+
+Issue Id            - https://bit.ly/33dYq5g
+Jira Duration       - https://bit.ly/3nXvl5X
+Optional Start Time - https://bit.ly/2KDYVyX
+	`,
+	Args: cobra.MinimumNArgs(2),
+	RunE: addTimeRun,
 }
 
 func init() {
