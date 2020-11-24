@@ -5,7 +5,7 @@ Some Jira API integrations for managing issues and worklogs through a cli
 ## Setup
 
 The jira api requires a api token. Generate one by following the instructions
-here: https://confluence.atlassian.com/cloud/api-tokens-938839638.html
+here: https://bit.ly/39jQgMa
 
 Store the resulting api in a config file at `~/.config/jirago.yaml` with the
 following format:
@@ -37,11 +37,11 @@ mv ./jirago /usr/local/bin/
 
 ## Commands
 
-_jirago transition_
+#### _jirago transition_
 
 WIP
 
-_jirago time_
+#### _jirago time_
 
 *args*
 
