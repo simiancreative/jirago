@@ -1,6 +1,6 @@
 ## What is it
 
-Some Jira API integrations for managing issues and worklogs through a cli
+Jira API integrations for managing issues and worklogs through a cli
 
 ## Setup
 
@@ -17,7 +17,7 @@ password: {newly generates api key}
 
 ## Install
 
-Build the tool for you system
+In the root of the project, Build the tool
 
 ```
 go build .
