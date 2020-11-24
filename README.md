@@ -17,11 +17,13 @@ password: {newly generates api key}
 
 ## Install
 
-In the root of the project, Build the tool
+In the root of the project, Build the tool 
 
 ```
 go build .
 ```
+
+[More info on building go binaries for different targets.](https://do.co/3fvYLF7)
 
 Use as is 
 
