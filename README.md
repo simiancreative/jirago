@@ -10,8 +10,7 @@ here: https://bit.ly/39jQgMa
 Store the resulting api in a config file at `~/.config/jirago.yaml` with the
 following format:
 
-```
-username: {your jira username}
+```username: {your jira username}
 password: {newly generates api key}
 ```
 
