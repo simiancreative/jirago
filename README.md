@@ -7,12 +7,17 @@ Jira API integrations for managing issues and worklogs through a cli
 The jira api requires a api token. Generate one by following the instructions
 here: https://bit.ly/39jQgMa
 
+If you have access to tempo, Generate a tempo api token by 
+going to Tempo>Settings in your browser, 
+scroll down to Data Access and select API integration.
+
 Store the resulting api in a config file at `~/.config/jirago.yaml` with the
 following format:
 
 ```yaml
 username: {your jira username}
 password: {newly generated api key}
+tempo: {tempo api token}
 ```
 
 ## Install
